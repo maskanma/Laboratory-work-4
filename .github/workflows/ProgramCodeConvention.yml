@@ -1,0 +1,26 @@
+name: Program Code Convention
+on:
+  push:
+jobs:
+  ProgramCodeLinter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code in Repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js 20 LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate ProgramCode.js
+        run: npx --yes @biomejs/biome check ProgramCode.js
+  ProgramCodeModifiedLinter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code in Repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js 20 LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate ProgramCodeModified.js
+        run: npx --yes @biomejs/biome check ProgramCodeModified.js

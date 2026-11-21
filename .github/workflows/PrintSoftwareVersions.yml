@@ -1,0 +1,25 @@
+name: Print Software Versions
+on:
+  push:
+jobs:
+  PrintProcessingVersions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js 20 LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Print Node Version
+        run: node --version
+      - name: Print npm Version
+        run: npm --version
+      - name: Print Express Version
+        run: npm view express version
+      - name: Print TypeScript Version
+        run: npx --yes typescript@5 tsc --version
+  PrintDBMSVersions:
+    runs-on: ubuntu-latest
+    needs: [PrintProcessingVersions]
+    steps:
+      - name: Print PostgreSQL Version
+        run: psql --version
